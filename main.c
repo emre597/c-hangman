@@ -21,7 +21,7 @@ int main(){
                                {"decision", "consequence", "opinion", "perspective", "solution", "justify", "doubt", "assume", "goal", "prioritize"}};
 
 
-    srand(time(NULL)); //Produce for random number(every second)                           
+    srand(time(NULL)); /*Produce for random number(every second)*/         printf("********Welcome to Hangman********\n\n");              
     
     while(1){
 
@@ -67,13 +67,6 @@ int main(){
         int remaining = 6;
         int a = 0, b = 0, tmp = 0, tmp2 = 0;
 
-
-
-
-    
-
-
-    printf("********Welcome to Hangman********\n\n");
 
 
         while(1){
@@ -170,6 +163,7 @@ int main(){
                 printf("\nCongratulations! The word is '%s'\n\n", prefword);
 
                 break;
+
             }
 
             else if(value == 1){
@@ -197,6 +191,48 @@ int main(){
             }
 
         } 
+
+        while(1){
+
+            printf("Do you want to leave? Yes/No: ");
+
+            char leave[10];
+
+            fgets(leave, sizeof(leave), stdin);
+
+
+            for(int i = 0; leave[i] != '\0'; i++){
+                leave[i] = tolower(leave[i]);
+
+            }
+                    
+            if(strcmp(leave, "yes\n") == 0){
+                printf("Exiting...");
+                return 0;
+            }
+
+            else if(strcmp(leave, "y\n") == 0){
+                printf("Exiting...");
+                return 0;
+            }
+
+            else if(strcmp(leave, "no\n") == 0){
+                printf("\n");
+                break;
+            }
+
+            else if(strcmp(leave, "n\n") == 0){
+                printf("\n");
+                break;
+            }
+
+            else{
+                printf("\nWarning! Try again...\n");
+                continue;
+            }
+
+
+        }
 
     }
     
