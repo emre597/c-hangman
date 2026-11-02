@@ -126,62 +126,87 @@ int main(){
 
             bool value = 0;
 
-            if(a != 0){//False Letters
-                printf("False Letters: ");
-                for(int i = 0; i < a; i++){
-                printf("%c ", falseGuess[i]);
-                }
-                printf("\n\n");
-            }
-
-
             for(int j = 0; j < 6; j++){
-                printf("%s\n", hangmanArt[remaining][j]);
-            }
+                printf("%s    ", hangmanArt[remaining][j]);
+                switch(j){
 
-            printf("\n");
+                    case 0: 
 
+                        printf("Category: %s", hint);
+                    break;
 
-            printf("Category: %s\n", hint);
-            printf("Guess Letter or Word: ");
+                    case 1: 
 
-            for(int i = 0; space[i] != '\0'; i++){ 
-                printf("%c ", space[i]);
+                        printf("Guess Letter or Word: ");
+                        for(int i = 0; space[i] != '\0'; i++){ 
+                             printf("%c ", space[i]);
+                        }
+                    break;
+
+                    case 2:
+
+                        printf("Remaining attempts: %d", remaining);
+                    break;
+
+                    case 3:
+
+                        if(a != 0){//False Letters
+                            printf("False Letters: ");
+                            for(int i = 0; i < a; i++){
+                                printf("%c ", falseGuess[i]);
+                            }
+
+                        }
+                    break;
+
+                }
+
+                printf("\n");
             }
 
 
             printf("\nGuess: ");
             fgets(guess, sizeof(guess), stdin);
+            printf("\n");
+
+            guess[strcspn(guess, "\n")] = '\0'; // strcspn() returns the index of the first '\n'; we replace it with '\0'
+
+
+            for(int i = 0; guess[i] != '\0'; i++){
+                guess[i] = tolower(guess[i]);
+            }    
+
+
+            if(strcmp(guess,prefword) == 0){
+                printf("\nCongratulations! The word is '%s'\n\n", prefword);
+
+                break;
+            }
 
 
 
-            if(strlen(guess) > 2){
-                printf("\nOnly one letter can be entered. Try again...\n");
-                printf("\nRemaining attempts %d\n", remaining);
+            if(strlen(guess) > 1){
+                printf("\nWrong word or invalid input. Try again...\n\n");
+                
                 continue;
             }
 
 
             if(isalpha(guess[0]) == false){ // 'isalpha()' is checks whether it is a letter.
 
-                if(guess[0] == '\n'){ // if user nothing write push "enter" 
-                    continue;
-                }
-
-                printf("\nPlease enter a letter. Try again...\n");
-                printf("\nRemaining attempts %d\n", remaining);
+                printf("\nPlease enter a letter. Try again...\n\n");
 
                 continue;
             }
 
-
+            
             guess[0] = tolower(guess[0]);
             tmp = ('z' - guess[0]); 
             tmp2 = (int)guess[0];
 
 
             if(beforeLetter[tmp] == true){
-                printf("This letter has already been entered. Please try again...\n\n");
+                printf("This letter has already been entered. Please try again...\n");
 
             
                 printf("Before Letters: ");
@@ -190,10 +215,10 @@ int main(){
 
                     printf("%c ", beforeLetter0[i]);
                 }
-                printf("\n");
-                printf("\nRemaining attempts %d\n", remaining);
+                printf("\n\n");
                 continue;
             }
+            
 
 
             else{
@@ -204,7 +229,6 @@ int main(){
 
 
             for(int i = 0; guess[i] != '\0'; i++){
-                guess[i] = tolower(guess[i]);
 
                 for(int j = 0; prefword[j] != '\0'; j++){
 
@@ -225,13 +249,9 @@ int main(){
                 break;
 
             }
-
+            
             else if(value == 1){
-
-                printf("\n----------------------------------\n");
-                printf("\nRemaining attempts %d\n", remaining);
                 continue;
-
             }
 
             else{
@@ -254,9 +274,6 @@ int main(){
 
                     break;
                 }
-
-                printf("\n----------------------------------\n");
-                printf("\nRemaining attempts %d\n", remaining);
 
             }
 
