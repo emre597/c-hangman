@@ -9,6 +9,57 @@
 
 int main(){
 
+    char hangmanArt [7][6][13] =  {{{"   +----+  "}, //Since the 'remaining' value starts at 6 and decreases toward 0, the 0th index becomes our final value.
+                                    {"   |    |  "},
+                                    {"   O    |  "},
+                                    {"  /|\\   |  "},
+                                    {"  / \\   |  "},
+                                    {"==========="}},
+                                
+                                   {{"   +----+  "}, 
+                                    {"   |    |  "},
+                                    {"   O    |  "},
+                                    {"  /|\\   |  "},
+                                    {"  /     |  "},
+                                    {"==========="}},
+                                
+                                   {{"   +----+  "}, 
+                                    {"   |    |  "},
+                                    {"   O    |  "},
+                                    {"  /|\\   |  "},
+                                    {"        |  "},
+                                    {"==========="}},
+                                
+                                   {{"   +----+  "}, 
+                                    {"   |    |  "},
+                                    {"   O    |  "},
+                                    {"  /|    |  "},
+                                    {"        |  "},
+                                    {"==========="}},
+                                
+                                   {{"   +----+  "}, 
+                                    {"   |    |  "},
+                                    {"   O    |  "},
+                                    {"   |    |  "},
+                                    {"        |  "},
+                                    {"==========="}}, 
+                                
+                                   {{"   +----+  "}, 
+                                    {"   |    |  "},
+                                    {"   O    |  "},
+                                    {"        |  "},
+                                    {"        |  "},
+                                    {"==========="}},
+                                
+                                   {{"   +----+  "}, 
+                                    {"   |    |  "},
+                                    {"        |  "},
+                                    {"        |  "},
+                                    {"        |  "},
+                                    {"==========="}}};  
+                              
+
+
     char words [10][10][15] = {{"convenient", "habit", "chore", "leisure", "notice", "postpone", "schedule", "appliance", "tidy", "occasional"}, 
                                {"colleague", "deadline", "promote", "negotiate", "applicant", "resign", "skill", "efficient", "supervise", "salary"}, 
                                {"device", "implement", "security", "access", "hardware", "automate", "compatible", "update", "transmit", "storage"}, 
@@ -21,7 +72,9 @@ int main(){
                                {"decision", "consequence", "opinion", "perspective", "solution", "justify", "doubt", "assume", "goal", "prioritize"}};
 
 
-    srand(time(NULL)); /*Produce for random number(every second)*/         printf("********Welcome to Hangman********\n\n");              
+    srand(time(NULL)); /*Produce for random number(every second)*/         
+    
+    printf("********Welcome to Hangman********\n\n");              
     
     while(1){
 
@@ -55,7 +108,7 @@ int main(){
         else if(number == 6) strcpy(hint, "Conversation and Social Interaction");
         else if(number == 7) strcpy(hint, "Travel and Transport");
         else if(number == 8) strcpy(hint, "Economy, Trade and Money");
-        else strcpy(hint, "Thouth, Abstract Ideas and Decision");
+        else strcpy(hint, "Thought, Abstract Ideas and Decision");
 
         char guess[50];
     
@@ -80,6 +133,13 @@ int main(){
                 }
                 printf("\n\n");
             }
+
+
+            for(int j = 0; j < 6; j++){
+                printf("%s\n", hangmanArt[remaining][j]);
+            }
+
+            printf("\n");
 
 
             printf("Category: %s\n", hint);
@@ -168,6 +228,7 @@ int main(){
 
             else if(value == 1){
 
+                printf("\n----------------------------------\n");
                 printf("\nRemaining attempts %d\n", remaining);
                 continue;
 
@@ -183,9 +244,18 @@ int main(){
                 if(remaining == 0){
                     printf("\nRemaining attempts %d Game Over! True Word %s\n\n", remaining, prefword);
 
+
+                        for(int j = 0; j < 6; j++){
+                            printf("%s\n", hangmanArt[remaining][j]);
+                        }
+            
+                        printf("\n");
+
+
                     break;
                 }
 
+                printf("\n----------------------------------\n");
                 printf("\nRemaining attempts %d\n", remaining);
 
             }
